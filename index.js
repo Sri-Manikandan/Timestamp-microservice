@@ -16,6 +16,12 @@ app.get("/api/hello", function (req, res) {
 
 app.get("/api/:date?",(req,res)=>{
   var dateObj = new Date(req.params.date);
+  if(req.params.date === undefined){
+    dateObj = new Date();
+  }
+  if(dateObj.toString() === "Invalid Date"){
+    dateObj = new Date(parseInt(req.params.date));
+  }
   if(dateObj.toString() === "Invalid Date"){
     res.json({
       error:"Invalid Date"
